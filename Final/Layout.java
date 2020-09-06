@@ -5,18 +5,13 @@ import javax.swing.*;
 public class Layout extends JFrame{
 	private Container contents;
 	
-	//Components
 	private JButton[][] squares = new JButton[8][7];
 	
-	//Colors
-	private Color colorBlack = Color.WHITE;
+	private Color color = Color.WHITE;
 	
-	//Current position
-	//Upper left conner of board is (0, 0)
 	private int row = 7;
 	private int col = 3;
 	
-	//Images
 	private ImageIcon sun = new ImageIcon("1.png");
 	
 	public Layout(){
@@ -25,11 +20,8 @@ public class Layout extends JFrame{
 		contents = getContentPane();
 		contents.setLayout(new GridLayout(8, 7));
 		
-		//Create Event Handler
 		ButtonHandler buttonHandler = new ButtonHandler();
 		
-		
-		//Create and add board components
 		for(int i = 0 ; i < 8 ; i++)
 		{
 			for(int j = 0 ; j < 7 ; j++)
@@ -45,26 +37,12 @@ public class Layout extends JFrame{
 		}
 		squares[row][col].setIcon(sun);
 		
-		//Size and display window
 		setSize(800, 800);
 		setResizable(false);
-		setLocationRelativeTo(null); //Centers window
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-	/*
-	private boolean isValidMove(int i, int j){
-		int rowDelta = Math.abs(i - row);
-		int colDelta = Math.abs(j - col);
-		
-		if((rowDelta == 1) && (colDelta == 2))
-			return true;
-		
-		if((colDelta == 1) && (rowDelta == 2))
-			return true;
-		
-		return false;
-	}
-	*/
+	
 	private boolean isValidMove(int i, int j){
 		int rowDelta = Math.abs(i - row);
 		int colDelta = Math.abs(j - col);
