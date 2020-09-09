@@ -447,7 +447,8 @@ public class Model extends JFrame
     setSize(800, 800);
     setResizable(false);
     setLocationRelativeTo(null); 
-    setVisible(true);    
+    setVisible(true);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
     }
     
     private class ButtonHandler implements ActionListener
