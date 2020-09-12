@@ -8,6 +8,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 import java.io.*;
 import java.util.*;
+
 abstract class ChessPiece
 {
     private boolean killed;
@@ -29,7 +30,6 @@ abstract class ChessPiece
     public abstract String pieceName();
     public abstract void rotated();
     public abstract boolean isRotated();
-    
 }
 
 class Chevron extends ChessPiece
@@ -47,7 +47,7 @@ class Chevron extends ChessPiece
         else 
             return "Blue Chevron";
     }
-    public boolean canMove( Spot start, Spot end)
+    public boolean canMove(Spot start, Spot end)
     {
         if(end.getPiece() != null)
         {
@@ -121,6 +121,7 @@ class Sun extends ChessPiece
             return "sunblue.png";
     }
 }
+
 class Plus extends ChessPiece
 {
     public Plus(boolean red)
@@ -136,7 +137,7 @@ class Plus extends ChessPiece
         else 
             return "Blue Plus";
     }
-    public boolean canMove( Spot start, Spot end)
+    public boolean canMove(Spot start, Spot end)
     {
         if(end.getPiece() != null)
         {
@@ -165,6 +166,7 @@ class Plus extends ChessPiece
             return "plusblue.png";
     }
 }
+
 class Triangle extends ChessPiece
 {
     public Triangle(boolean red)
@@ -180,7 +182,7 @@ class Triangle extends ChessPiece
         else 
             return "Blue Triangle";
     }
-    public boolean canMove( Spot start, Spot end)
+    public boolean canMove(Spot start, Spot end)
     {
         if(end.getPiece() != null)
         {
@@ -209,6 +211,7 @@ class Triangle extends ChessPiece
             return "rotatedtriangleblue.png";
     }
 }
+
 class Arrow extends ChessPiece
 {
     private boolean rotate;
@@ -233,7 +236,7 @@ class Arrow extends ChessPiece
         else 
             return "Blue Arrow";
     }
-    public boolean canMove( Spot start, Spot end)
+    public boolean canMove(Spot start, Spot end)
     {
         int x;
         if(end.getPiece() != null)
@@ -253,23 +256,17 @@ class Arrow extends ChessPiece
     
     public String pieceImage()
     {
-        //if(!this.rotate)
-            if(this.isRed())
-                return "arrowred.png" ;
-            else
-                return "arrowblue.png" ;
-        //else
-           // return rotatedPieceImage();
+        if(this.isRed())
+            return "arrowred.png" ;
+        else
+            return "arrowblue.png" ;
     }
     public String rotatedPieceImage()
     {
-        //if(this.rotate)
-            if(this.isRed())
-                return "rotatedarrowred.png";
-            else
-                return "rotatedarrowblue.png";
-        //else
-            //return pieceImage();
+        if(this.isRed())
+            return "rotatedarrowred.png";
+        else
+            return "rotatedarrowblue.png";
     }
 }
 
@@ -316,6 +313,7 @@ class Spot
         return this.y;
     }
 }
+
 class ChessBoard
 {
     private Spot[][] boxes = new Spot[8][7];
@@ -326,11 +324,11 @@ class ChessBoard
     
     public void resetBoard()
     {
-        for(int i = 0; i < 8; i ++)
+        for(int i = 0 ; i < 8 ; i++)
         {
             for(int j = 0 ; j < 7 ; j++) 
             {
-                boxes[i][j] = new Spot(i,j,null);
+                boxes[i][j] = new Spot(i, j, null);
             }
         }
         boxes[0][0].setPiece(new Plus(false));
@@ -361,8 +359,6 @@ class ChessBoard
     {
         return boxes[i][j];
     }
-    
-
 }
 
 public class Model extends JFrame
@@ -370,7 +366,7 @@ public class Model extends JFrame
     private Container contents;
     private JButton[][] squares = new JButton[8][7];
     private Color color = Color.WHITE;
-    int[] previousClicked = {0,0};
+    int[] previousClicked = {0, 0};
     int movecount = 0;
     int rotatecount = 0;
     boolean gameend = false;
@@ -382,23 +378,23 @@ public class Model extends JFrame
     
     public Model()
     {
-    super("Webale Chess");
-    JPanel topBoard = new JPanel(new BorderLayout());  
-    JPanel contents = new JPanel(new GridLayout(8,7));
-    JButton saveBtn = new JButton("Save");
-    saveBtn.addActionListener(new ActionListener()
-    {
+        super("Webale Chess");
+        JPanel topBoard = new JPanel(new BorderLayout());  
+        JPanel contents = new JPanel(new GridLayout(8,7));
+        JButton saveBtn = new JButton("Save Game");
+        saveBtn.addActionListener(new ActionListener()
+        {
             public void actionPerformed(ActionEvent e)
             {
                 JFrame f = new JFrame();   
                 String filename=JOptionPane.showInputDialog(f,"Enter Name"); 
                 save(filename,board,movecount);
             }
-    });
-    
-    JButton restartBtn = new JButton("Restart");
-    restartBtn.addActionListener(new ActionListener()
-    {
+        });
+
+        JButton restartBtn = new JButton("Restart Game");
+        restartBtn.addActionListener(new ActionListener()
+        {
             public void actionPerformed(ActionEvent e)
             {
                 restart(board);
@@ -408,10 +404,10 @@ public class Model extends JFrame
                 bluetransformflag = true;
                 gameend = false;
             }
-    });    
-    JButton loadBtn = new JButton("Load");
-    loadBtn.addActionListener(new ActionListener()
-    {
+        });    
+        JButton loadBtn = new JButton("Load Game");
+        loadBtn.addActionListener(new ActionListener()
+        {
             public void actionPerformed(ActionEvent e)
             {
                 JFrame f = new JFrame();   
@@ -420,53 +416,51 @@ public class Model extends JFrame
                 rotatecount = movecount;
                 gameend = false;
             }
-    });
-    topBoard.add(saveBtn, BorderLayout.WEST);
-    topBoard.add(restartBtn, BorderLayout.CENTER);
-    topBoard.add(loadBtn, BorderLayout.EAST);
-    add(topBoard, BorderLayout.NORTH);
-    add(contents, BorderLayout.CENTER);
-    ButtonHandler buttonHandler = new ButtonHandler();
-    
-    for(int i = 0 ; i < 8 ; i++)
-    {
-        for(int j = 0 ; j < 7 ; j++)
-        {
-            squares[i][j] = new JButton();
-            squares[i][j].setBackground(color);
-            contents.add(squares[i][j]);
-            squares[i][j].addActionListener(buttonHandler);
-            if(board.getBox(i,j).getPiece() != null)
-            {
-                squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
-            }
-            else 
-                squares[i][j].setIcon(null);
-        }
-    }
-    setSize(800, 800);
-    setResizable(false);
-    setLocationRelativeTo(null); 
-    setVisible(true);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
-    }
-    
-    private class ButtonHandler implements ActionListener
-    {
-     
-    public void actionPerformed(ActionEvent e)
-    {
-        Object source = e.getSource();
-            
+        });
+        topBoard.add(saveBtn, BorderLayout.WEST);
+        topBoard.add(restartBtn, BorderLayout.CENTER);
+        topBoard.add(loadBtn, BorderLayout.EAST);
+        add(topBoard, BorderLayout.NORTH);
+        add(contents, BorderLayout.CENTER);
+        ButtonHandler buttonHandler = new ButtonHandler();
+
         for(int i = 0 ; i < 8 ; i++)
         {
             for(int j = 0 ; j < 7 ; j++)
             {
-                if(source == squares[i][j])
+                squares[i][j] = new JButton();
+                squares[i][j].setBackground(color);
+                contents.add(squares[i][j]);
+                squares[i][j].addActionListener(buttonHandler);
+                if(board.getBox(i,j).getPiece() != null)
                 {
+                    squares[i][j].setIcon(new ImageIcon(board.getBox(i, j).getPiece().pieceImage()));
+                }
+                else 
+                    squares[i][j].setIcon(null);
+            }
+        }
+        setSize(800, 800);
+        setResizable(true);
+		setMinimumSize(new Dimension(600, 600)); 
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
+    }
+    
+    private class ButtonHandler implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            Object source = e.getSource();
+
+            for(int i = 0 ; i < 8 ; i++)
+            {
+                for(int j = 0 ; j < 7 ; j++)
+                {
+                    if(source == squares[i][j])
+                    {
                         if(!gameend && firstmove && board.getBox(i,j).getPiece()!= null)
                         {
-                            
                             previousClicked[0] = i;
                             previousClicked[1] = j;
                             firstmove = false;
@@ -474,7 +468,6 @@ public class Model extends JFrame
                         }
                         else
                         {
-
                             if(!gameend && board.getBox(previousClicked[0],previousClicked[1]).getPiece() != null)
                             {   
                                 processClick(i, j, previousClicked[0],previousClicked[1]);
@@ -482,22 +475,17 @@ public class Model extends JFrame
                                 previousClicked[1] = j;
                                 firstmove = true;
                                 secondmove = false;
-
                             }
                             return;
                         }
-                    
+                    }
                 }
-                
             }
         }
-    }
     }
     
     private boolean processClick(int i , int j, int ii, int jj)
     {
-       //int tempi = Math.abs(ii-i);
-       //int tempj = Math.abs(jj-j);
        if(movecount % 2 != 0 && board.getBox(ii,jj).getPiece().isRed())
             return false;
             
@@ -599,11 +587,6 @@ public class Model extends JFrame
             return false;
        squares[ii][jj].setIcon(null);
        squares[i][j].setIcon(new ImageIcon(board.getBox(ii,jj).getPiece().pieceImage()));
-       /*
-       if((i == 7 || i == 0) && board.getBox(i,j).getPiece() != null &&(board.getBox(ii,jj).getPiece().pieceName().equals("Red Arrow") ||board.getBox(ii,jj).getPiece().pieceName().equals("Blue Arrow") ))
-            squares[i][j].setIcon(new ImageIcon(board.getBox(ii,jj).getPiece().rotatedPieceImage()));
-       else 
-            squares[i][j].setIcon(new ImageIcon(board.getBox(ii,jj).getPiece().pieceImage()));*/
        
        if(board.getBox(i,j).getPiece() != null && board.getBox(i,j).getPiece().pieceName().equals("Blue Sun"))
        {
@@ -626,9 +609,7 @@ public class Model extends JFrame
        if((i==7 || i ==0) && (board.getBox(i,j).getPiece().pieceName().equals("Red Arrow") ||board.getBox(i,j).getPiece().pieceName().equals("Blue Arrow")))
        {
            board.getBox(i,j).getPiece().rotated(); 
-           //squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
        }
-       //movecount ++;
        
        if(movecount > 0 && movecount % 2 == 0)
        {
@@ -654,8 +635,6 @@ public class Model extends JFrame
        rotateBoard(squares,board,rotatecount++);
 
        return true;
-
-
     } 
     
     public void redtransform(ChessBoard board)
@@ -668,7 +647,6 @@ public class Model extends JFrame
                     board.getBox(i,j).setPiece(new Triangle(true)); 
                 else if(board.getBox(i,j).getPiece()!= null &&board.getBox(i,j).getPiece().isRed() &&  board.getBox(i,j).getPiece().pieceName().equals("Red Triangle"))
                     board.getBox(i,j).setPiece(new Plus(true));
-                    
             }
         }
     }
@@ -683,10 +661,10 @@ public class Model extends JFrame
                     board.getBox(i,j).setPiece(new Triangle(false)); 
                 else if(board.getBox(i,j).getPiece()!= null && !(board.getBox(i,j).getPiece().isRed()) &&  board.getBox(i,j).getPiece().pieceName().equals("Blue Triangle"))
                     board.getBox(i,j).setPiece(new Plus(false));
-                    
             }
         }
     }
+    
     public void restart(ChessBoard board)
     {
         board.resetBoard();
@@ -701,33 +679,31 @@ public class Model extends JFrame
             }
         }
     }
+    
     public void save(String filename, ChessBoard board, int movecount)
     {
         String content ="";
         for(int i = 0 ; i < 8 ; i++)
         {
             for(int j = 0 ; j < 7 ; j++)
-                {
-                    if(board.getBox(i,j).getPiece() != null && !(board.getBox(i,j).getPiece() instanceof Arrow))
-                        content += i + " " + j + " " + board.getBox(i,j).getPiece().pieceName() + "\n";
-                        
-                    else if(board.getBox(i,j).getPiece() instanceof Arrow && board.getBox(i,j).getPiece().isRotated())
-                        content += i + " " + j + " " + "Rotated "+ board.getBox(i,j).getPiece().pieceName() + "\n"; 
-                    
-                    else if(board.getBox(i,j).getPiece() instanceof Arrow)
-                        content += i + " " + j + " " + board.getBox(i,j).getPiece().pieceName() + "\n";
-                    
-                }
-             
+            {
+                if(board.getBox(i,j).getPiece() != null && !(board.getBox(i,j).getPiece() instanceof Arrow))
+                    content += i + " " + j + " " + board.getBox(i,j).getPiece().pieceName() + "\n";
+
+                else if(board.getBox(i,j).getPiece() instanceof Arrow && board.getBox(i,j).getPiece().isRotated())
+                    content += i + " " + j + " " + "Rotated "+ board.getBox(i,j).getPiece().pieceName() + "\n"; 
+
+                else if(board.getBox(i,j).getPiece() instanceof Arrow)
+                    content += i + " " + j + " " + board.getBox(i,j).getPiece().pieceName() + "\n";
+            }
         }
         content += movecount;
         try{
-        FileWriter fw = new FileWriter(filename + ".txt");
-        fw.write(content);
-        fw.close();
+            FileWriter fw = new FileWriter(filename + ".txt");
+            fw.write(content);
+            fw.close();
         }
         catch (Exception e){}
-   
     }
     
     public int load(String filename, ChessBoard board, int movecount)
@@ -746,7 +722,7 @@ public class Model extends JFrame
             while (fr.hasNextLine()) 
             {
             String data = fr.nextLine();
-           if(fr.hasNextLine())
+            if(fr.hasNextLine())
             {
                 if(data.substring(4).equals("Red Chevron"))
                     board.getBox(Integer.parseInt(data.substring(0,1)),Integer.parseInt(data.substring(2,3))).setPiece(new Chevron(true));
@@ -772,10 +748,9 @@ public class Model extends JFrame
                     board.getBox(Integer.parseInt(data.substring(0,1)),Integer.parseInt(data.substring(2,3))).setPiece(new Arrow(true,true));                
                 else if(data.substring(4).equals("Rotated Blue Arrow"))
                     board.getBox(Integer.parseInt(data.substring(0,1)),Integer.parseInt(data.substring(2,3))).setPiece(new Arrow(false,true));                      
-                }
+            }
             else 
                 movecount = Integer.parseInt(data.substring(0,1));
-        
             }
             fr.close();
         }
@@ -787,24 +762,21 @@ public class Model extends JFrame
                 if(board.getBox(i,j).getPiece() != null)
                 {
                     if(movecount % 2 == 0)
-                            if(board.getBox(i,j).getPiece() instanceof Arrow && (board.getBox(i,j).getPiece().isRotated()))
-                                squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().rotatedPieceImage()));
-                            else
-                                squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
-                        //squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
+                        if(board.getBox(i,j).getPiece() instanceof Arrow && (board.getBox(i,j).getPiece().isRotated()))
+                            squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().rotatedPieceImage()));
+                        else
+                            squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
                     else
-                            if(board.getBox(i,j).getPiece() instanceof Arrow && (board.getBox(i,j).getPiece().isRotated()))
-                                squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
-                            else
-                                squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().rotatedPieceImage()));
-                        //squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().rotatedPieceImage()));
+                        if(board.getBox(i,j).getPiece() instanceof Arrow && (board.getBox(i,j).getPiece().isRotated()))
+                            squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().pieceImage()));
+                        else
+                            squares[i][j].setIcon(new ImageIcon(board.getBox(i,j).getPiece().rotatedPieceImage()));
                 }
-    
             }
         }
-     
         return movecount;
     }
+    
     public void rotateBoard(JButton[][] squares, ChessBoard board,int rotatecount)
     {
          int ii = 0;
@@ -826,26 +798,24 @@ public class Model extends JFrame
              {
                  if(temp.getBox(i,j).getPiece() != null)
                  {
-                        if(rotatecount % 2 == 0 )
-                                
-                            if(temp.getBox(i,j).getPiece() instanceof Arrow && (temp.getBox(i,j).getPiece().isRotated()))
-                                squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().pieceImage()));
-                            else
-                                squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().rotatedPieceImage()));
-
+                    if(rotatecount % 2 == 0 )
+                        if(temp.getBox(i,j).getPiece() instanceof Arrow && (temp.getBox(i,j).getPiece().isRotated()))
+                            squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().pieceImage()));
                         else
-                            if(temp.getBox(i,j).getPiece() instanceof Arrow && (temp.getBox(i,j).getPiece().isRotated()))
-                                squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().rotatedPieceImage()));
-                            else
-                                squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().pieceImage()));
-                        board.getBox(ii,jj).setPiece(temp.getBox(i,j).getPiece());
+                            squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().rotatedPieceImage()));
+
+                    else
+                        if(temp.getBox(i,j).getPiece() instanceof Arrow && (temp.getBox(i,j).getPiece().isRotated()))
+                            squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().rotatedPieceImage()));
+                        else
+                            squares[ii][jj].setIcon(new ImageIcon(temp.getBox(i,j).getPiece().pieceImage()));
+                    board.getBox(ii,jj).setPiece(temp.getBox(i,j).getPiece());
                  }
                  else 
-                   {
-                       squares[ii][jj].setIcon(null);
-                       board.getBox(ii,jj).setPiece(null);
-                    }
- 
+                 {
+                   squares[ii][jj].setIcon(null);
+                   board.getBox(ii,jj).setPiece(null);
+                 }
                  jj++;
              }
              ii++;
