@@ -33,15 +33,15 @@ public class Triangle implements ChessPiece{
     
     public String pieceImage(){
         if(this.isRed())
-            return "trianglered.png" ;
+            return "Pieces/trianglered.png" ;
         else
-            return "triangleblue.png" ;
+            return "Pieces/triangleblue.png" ;
     }
 	
     public String rotatedPieceImage(){
         if(this.isRed())
-            return "rotatedtrianglered.png";
+            return "Pieces/rotatedtrianglered.png";
         else
-            return "rotatedtriangleblue.png";
+            return "Pieces/rotatedtriangleblue.png";
     }
 }
