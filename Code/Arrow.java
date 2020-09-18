@@ -44,15 +44,15 @@ public class Arrow implements ChessPiece{
     
     public String pieceImage(){
             if(this.isRed())
-                return "arrowred.png" ;
+                return "Pieces/arrowred.png" ;
             else
-                return "arrowblue.png" ;
+                return "Pieces/arrowblue.png" ;
     }
 	
     public String rotatedPieceImage(){
             if(this.isRed())
-                return "rotatedarrowred.png";
+                return "Pieces/rotatedarrowred.png";
             else
-                return "rotatedarrowblue.png";
+                return "Pieces/rotatedarrowblue.png";
     }
 }
