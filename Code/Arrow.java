@@ -1,39 +1,34 @@
-public class Arrow implements ChessPiece
-{
-	private boolean rotate;
+public class Arrow implements ChessPiece{
+    private boolean rotate;
     private boolean red;
     
-    public Arrow(boolean red, boolean rotate)
-    {
+    public Arrow(boolean red, boolean rotate){
         this.red = red;
-		this.rotate = rotate;
+	this.rotate = rotate;
     }
     
-    public boolean isRed()
-    {
+    public boolean isRed(){
         return this.red == true;
     }
     
-    public void rotated()
-    {
+    public void rotated(){
         rotate = !rotate;
     }
-    public boolean isRotated()
-    {
+	
+    public boolean isRotated(){
         return this.rotate; 
     }
-    public String pieceName()
-    {
+	
+    public String pieceName(){
         if(this.isRed())
             return "Red Arrow";
         else 
             return "Blue Arrow";
     }
-    public boolean canMove( Spot start, Spot end)
-    {
+	
+    public boolean canMove( Spot start, Spot end){
         int x;
-        if(end.getPiece() != null)
-        {
+        if(end.getPiece() != null){
             if(end.getPiece().isRed() == start.getPiece().isRed()) 
                 return false;
         }
@@ -47,24 +42,17 @@ public class Arrow implements ChessPiece
         return false;
     }
     
-    public String pieceImage()
-    {
-        //if(!this.rotate)
+    public String pieceImage(){
             if(this.isRed())
                 return "arrowred.png" ;
             else
                 return "arrowblue.png" ;
-        //else
-           // return rotatedPieceImage();
     }
-    public String rotatedPieceImage()
-    {
-        //if(this.rotate)
+	
+    public String rotatedPieceImage(){
             if(this.isRed())
                 return "rotatedarrowred.png";
             else
                 return "rotatedarrowblue.png";
-        //else
-            //return pieceImage();
     }
 }
