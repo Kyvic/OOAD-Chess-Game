@@ -1,32 +1,26 @@
-public class Chevron implements ChessPiece
-{
-	
+public class Chevron implements ChessPiece{
     private boolean red;
     
-    public Chevron(boolean red)
-    {
+    public Chevron(boolean red){
         this.red = red;
     }
     
-    public boolean isRed()
-    {
+    public boolean isRed(){
         return this.red == true;
     }
-	
-    
+
     public void rotated(){}
     public boolean isRotated(){return false;}
-    public String pieceName()
-    {
+	
+    public String pieceName(){
         if(this.isRed())
             return "Red Chevron";
         else 
             return "Blue Chevron";
     }
-    public boolean canMove(Spot start, Spot end)
-    {
-        if(end.getPiece() != null)
-        {
+	
+    public boolean canMove(Spot start, Spot end){
+        if(end.getPiece() != null){
             if(end.getPiece().isRed() == start.getPiece().isRed()) 
                 return false;
         }
@@ -37,15 +31,14 @@ public class Chevron implements ChessPiece
         return false;
     }
     
-    public String pieceImage()
-    {
+    public String pieceImage(){
         if(this.isRed())
             return "chevronred.png" ;
         else
             return "chevronblue.png" ;
     }
-    public String rotatedPieceImage()
-    {
+	
+    public String rotatedPieceImage(){
         if(this.isRed())
             return "rotatedchevronred.png";
         else
