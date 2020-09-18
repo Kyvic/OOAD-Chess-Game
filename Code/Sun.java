@@ -1,37 +1,33 @@
-public class Sun implements ChessPiece
-{
+public class Sun implements ChessPiece{
     private boolean red;
     
-    public Sun(boolean red)
-    {
+    public Sun(boolean red){
         this.red = red;
     }
     
-    public boolean isRed()
-    {
+    public boolean isRed(){
         return this.red == true;
     }
 	
     public void rotated(){}
     public boolean isRotated(){return false;}
-    public String pieceName()
-    {
+	
+    public String pieceName(){
         if (this.isRed())
             return "Red Sun";
         else 
             return "Blue Sun";
     }
-    public String pieceImage()
-    {
+	
+    public String pieceImage(){
         if(this.isRed())
             return "sunred.png" ;
         else
             return "sunblue.png" ;
     }
-    public boolean canMove(Spot start, Spot end)
-    {
-        if(end.getPiece() != null)
-        {
+	
+    public boolean canMove(Spot start, Spot end){
+        if(end.getPiece() != null){
             if(end.getPiece().isRed() == start.getPiece().isRed()) 
                 return false;
         }
@@ -42,8 +38,7 @@ public class Sun implements ChessPiece
         return false;
     }
     
-    public String rotatedPieceImage()
-    {
+    public String rotatedPieceImage(){
         if(this.isRed())
             return "sunred.png";
         else
