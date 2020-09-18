@@ -33,16 +33,16 @@ public class Chevron implements ChessPiece{
     
     public String pieceImage(){
         if(this.isRed())
-            return "chevronred.png" ;
+            return "Pieces/chevronred.png" ;
         else
-            return "chevronblue.png" ;
+            return "Pieces/chevronblue.png" ;
     }
 	
     public String rotatedPieceImage(){
         if(this.isRed())
-            return "rotatedchevronred.png";
+            return "Pieces/rotatedchevronred.png";
         else
-            return "rotatedchevronblue.png";
+            return "Pieces/rotatedchevronblue.png";
     }
 }
 
