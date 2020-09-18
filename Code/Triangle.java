@@ -1,30 +1,26 @@
-public class Triangle implements ChessPiece
-{
+public class Triangle implements ChessPiece{
     private boolean red;
     
-    public Triangle(boolean red)
-    {
+    public Triangle(boolean red){
         this.red = red;
     }
     
-    public boolean isRed()
-    {
+    public boolean isRed(){
         return this.red == true;
     }
 	
     public void rotated(){}
     public boolean isRotated(){return false;}
-    public String pieceName()
-    {
+	
+    public String pieceName(){
         if(this.isRed())
             return "Red Triangle";
         else 
             return "Blue Triangle";
     }
-    public boolean canMove( Spot start, Spot end)
-    {
-        if(end.getPiece() != null)
-        {
+	
+    public boolean canMove( Spot start, Spot end){
+        if(end.getPiece() != null){
             if(end.getPiece().isRed() == start.getPiece().isRed()) 
                 return false;
         }
@@ -35,15 +31,14 @@ public class Triangle implements ChessPiece
         return false;
     }
     
-    public String pieceImage()
-    {
+    public String pieceImage(){
         if(this.isRed())
             return "trianglered.png" ;
         else
             return "triangleblue.png" ;
     }
-    public String rotatedPieceImage()
-    {
+	
+    public String rotatedPieceImage(){
         if(this.isRed())
             return "rotatedtrianglered.png";
         else
