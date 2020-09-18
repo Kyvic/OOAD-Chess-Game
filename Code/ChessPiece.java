@@ -1,5 +1,4 @@
-public interface ChessPiece
-{
+public interface ChessPiece{
     public abstract boolean isRed();
     public abstract boolean canMove(Spot start, Spot end);
     public abstract String pieceImage();
@@ -7,6 +6,5 @@ public interface ChessPiece
     public abstract String pieceName();
     public abstract void rotated();
     public abstract boolean isRotated();
-  
 }
 
