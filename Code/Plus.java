@@ -33,15 +33,15 @@ public class Plus implements ChessPiece{
     
     public String pieceImage(){
         if(this.isRed())
-            return "plusred.png" ;
+            return "Pieces/plusred.png" ;
         else
-            return "plusblue.png" ;
+            return "Pieces/plusblue.png" ;
     }
 	
     public String rotatedPieceImage(){
         if(this.isRed())
-            return "plusred.png";
+            return "Pieces/plusred.png";
         else
-            return "plusblue.png";
+            return "Pieces/plusblue.png";
     }
 }
