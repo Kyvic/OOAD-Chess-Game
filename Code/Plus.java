@@ -1,30 +1,26 @@
-public class Plus implements ChessPiece
-{
+public class Plus implements ChessPiece{
     private boolean red;
     
-    public Plus(boolean red)
-    {
+    public Plus(boolean red){
         this.red = red;
     }
     
-    public boolean isRed()
-    {
+    public boolean isRed(){
         return this.red == true;
     }
 	
     public void rotated(){}
     public boolean isRotated(){return false;}
-    public String pieceName()
-    {
+	
+    public String pieceName(){
         if(this.isRed())
             return "Red Plus";
         else 
             return "Blue Plus";
     }
-    public boolean canMove( Spot start, Spot end)
-    {
-        if(end.getPiece() != null)
-        {
+	
+    public boolean canMove( Spot start, Spot end){
+        if(end.getPiece() != null){
             if(end.getPiece().isRed() == start.getPiece().isRed()) 
                 return false;
         }
@@ -35,15 +31,14 @@ public class Plus implements ChessPiece
         return false;
     }
     
-    public String pieceImage()
-    {
+    public String pieceImage(){
         if(this.isRed())
             return "plusred.png" ;
         else
             return "plusblue.png" ;
     }
-    public String rotatedPieceImage()
-    {
+	
+    public String rotatedPieceImage(){
         if(this.isRed())
             return "plusred.png";
         else
