@@ -1,8 +1,6 @@
 # Webale Chess Game
 Webale chess is a kind of chess game with different rules and is played on a 7x8 board.
 
-Ps. Most of the part is done by Beh. 
-
 ![Screenshot 2020-09-18 110110](https://user-images.githubusercontent.com/69897444/93550917-225f2b00-f99f-11ea-841e-397697dfe45e.png)
 ## Rules
 ![sunRed](https://user-images.githubusercontent.com/69897444/93551093-97cafb80-f99f-11ea-9316-ee4e95a6a355.png) **Sun** - Can only move one step in any direction. The game ends when the Sun is captured by the other side
